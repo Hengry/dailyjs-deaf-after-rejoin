@@ -136,6 +136,8 @@ export default function App() {
       .join({
         // Replace with your own room url
         url: dailyRoomUrl,
+        startAudioOff: true,
+        startVideoOff: true,
       })
       .catch((err) => {
         console.error("Error joining room:", err);
@@ -198,6 +200,20 @@ export default function App() {
     console.log("--- changing speaker device");
     setSpeaker(ev?.target?.value);
   }
+
+  const stopMicrophone = () => {
+    if (!callObject) {
+      return;
+    }
+    callObject.setLocalAudio(false);
+  };
+
+  const updateMicrophoneOn = () => {
+    if (!callObject) {
+      return;
+    }
+    callObject.setLocalAudio(true);
+  };
 
   const stopCamera = () => {
     if (!callObject) {
@@ -309,6 +325,9 @@ export default function App() {
         <br />
         <button onClick={() => stopCamera()}>Camera Off</button>
         <button onClick={() => updateCameraOn()}>Camera On</button> <br />
+        <br />
+        <button onClick={() => stopMicrophone()}>Mic Off</button>
+        <button onClick={() => updateMicrophoneOn()}>Mic On</button> <br />
         <br />
       </div>
       {participantIds.map((id) => (
