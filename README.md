@@ -17,10 +17,8 @@ Note the issue only happens on specific devices.
 4. (`device A`) Turn on the microphone by tap the button `Mic On`.
 5. Next, use `device B`, press startCamera for the permissions request.
 6. (`device B`) Agree with permissions.
-7. (`device B`) Join the call.
-8. Now, speak something in `device A`. It should be hearable at `device B`.
-9. (`device B`) Leave the call.
-10. (`device B`) Join the call again.
-11. **_ Now, speak something in `device A`. It would be NOT hearable at `device B`. _**
-12. (`device B`) Tap on `Mic On` and then `Mic Off`.
-13. Now, speak something in `device A`. It would be hearable at `device B` again.
+7. (`device B`) Tap on `Leave call`.
+8. (`device B`) Tap on `Join call`.
+9. **_ Now, speak something in `device A`. It would be NOT hearable at `device B`. _**
+10. (`device B`) Tap on `Mic On` and then `Mic Off`.
+11. Now, speak something in `device A`. It would be hearable at `device B` again.
