@@ -341,7 +341,11 @@ export default function App() {
           sessionId={screen.session_id}
         />
       ))} */}
-      <DailyAudio />
+      <DailyAudio
+        onPlayFailed={(e) => {
+          console.log('failed', e, e.message);
+        }}
+      />
       <div id='meetingState'>Meeting State: {callObject?.meetingState()}</div>
       {inputSettingsUpdated && <div>Input settings updated</div>}
       {errorMsg && <div id='errorMsg'>{errorMsg}</div>}
