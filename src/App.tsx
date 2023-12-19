@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState } from 'react';
 import Daily, {
   DailyEventObject,
   DailyEventObjectParticipant,
-} from "@daily-co/daily-js";
+} from '@daily-co/daily-js';
 
 import {
   useDaily,
@@ -14,12 +14,12 @@ import {
   DailyAudio,
   useInputSettings,
   useNetwork,
-} from "@daily-co/daily-react";
+} from '@daily-co/daily-react';
 
-import "./styles.css";
+import './styles.css';
 
-console.info("Daily version: %s", Daily.version());
-console.info("Daily supported Browser:");
+console.info('Daily version: %s', Daily.version());
+console.info('Daily supported Browser:');
 console.dir(Daily.supportedBrowser());
 
 export default function App() {
@@ -45,43 +45,43 @@ export default function App() {
 
   const { errorMsg, updateInputSettings } = useInputSettings({
     onError(ev) {
-      console.log("Input settings error (daily-react)", ev);
+      console.log('Input settings error (daily-react)', ev);
     },
     onInputSettingsUpdated(ev) {
       setInputSettingsUpdated(true);
-      console.log("Input settings updated (daily-react)", ev);
+      console.log('Input settings updated (daily-react)', ev);
     },
   });
 
   const { startScreenShare, stopScreenShare, screens } = useScreenShare();
 
   const logEvent = useCallback((evt: DailyEventObject) => {
-    console.log("logEvent: " + evt.action, evt);
+    console.log('logEvent: ' + evt.action, evt);
   }, []);
 
-  useDailyEvent("participant-joined", logEvent);
-  useDailyEvent("joining-meeting", logEvent);
-  useDailyEvent("joined-meeting", logEvent);
-  useDailyEvent("participant-updated", logEvent);
-  useDailyEvent("track-started", logEvent);
-  useDailyEvent("track-stopped", logEvent);
-  useDailyEvent("started-camera", logEvent);
-  useDailyEvent("input-settings-updated", logEvent);
-  useDailyEvent("loading", logEvent);
-  useDailyEvent("loaded", logEvent);
-  useDailyEvent("load-attempt-failed", logEvent);
-  useDailyEvent("receive-settings-updated", logEvent);
-  useDailyEvent("left-meeting", logEvent);
-  useDailyEvent("participant-left", logEvent);
-  useDailyEvent("network-connection", logEvent);
+  useDailyEvent('participant-joined', logEvent);
+  useDailyEvent('joining-meeting', logEvent);
+  useDailyEvent('joined-meeting', logEvent);
+  useDailyEvent('participant-updated', logEvent);
+  useDailyEvent('track-started', logEvent);
+  useDailyEvent('track-stopped', logEvent);
+  useDailyEvent('started-camera', logEvent);
+  useDailyEvent('input-settings-updated', logEvent);
+  useDailyEvent('loading', logEvent);
+  useDailyEvent('loaded', logEvent);
+  useDailyEvent('load-attempt-failed', logEvent);
+  useDailyEvent('receive-settings-updated', logEvent);
+  useDailyEvent('left-meeting', logEvent);
+  useDailyEvent('participant-left', logEvent);
+  useDailyEvent('network-connection', logEvent);
 
   // useDailyEvent("network-quality-change", logEvent);
-  useDailyEvent("camera-error", logEvent);
-  useDailyEvent("error", (evt) => logEvent);
+  useDailyEvent('camera-error', logEvent);
+  useDailyEvent('error', (evt) => logEvent);
 
   // Error logging for background effects
-  useDailyEvent("input-settings-updated", logEvent);
-  useDailyEvent("nonfatal-error", logEvent);
+  useDailyEvent('input-settings-updated', logEvent);
+  useDailyEvent('nonfatal-error', logEvent);
 
   function enableBlur() {
     if (!callObject || enableBlurClicked) {
@@ -94,7 +94,7 @@ export default function App() {
     updateInputSettings({
       video: {
         processor: {
-          type: "background-blur",
+          type: 'background-blur',
           config: { strength: 0.5 },
         },
       },
@@ -112,10 +112,10 @@ export default function App() {
     updateInputSettings({
       video: {
         processor: {
-          type: "background-image",
+          type: 'background-image',
           config: {
             source:
-              "https://docs.daily.co/assets/guides-large-meetings-hero.jpeg",
+              'https://docs.daily.co/assets/guides-large-meetings-hero.jpeg',
           },
         },
       },
@@ -129,7 +129,7 @@ export default function App() {
     }
 
     if (!dailyRoomUrl) {
-      alert("Please enter a room url (e.g. https://example.daily.co/room)");
+      alert('Please enter a room url (e.g. https://example.daily.co/room)');
     }
 
     callObject
@@ -140,9 +140,9 @@ export default function App() {
         startVideoOff: true,
       })
       .catch((err) => {
-        console.error("Error joining room:", err);
+        console.error('Error joining room:', err);
       });
-    console.log("joined!");
+    console.log('joined!');
   };
 
   const startCamera = () => {
@@ -151,7 +151,7 @@ export default function App() {
     }
 
     callObject.startCamera().then((res) => {
-      console.log("startCamera: ", res);
+      console.log('startCamera: ', res);
     });
   };
 
@@ -179,25 +179,25 @@ export default function App() {
       return;
     }
     callObject.leave().catch((err) => {
-      console.error("Error leaving room:", err);
+      console.error('Error leaving room:', err);
     });
   }
 
   // change video device
   function handleChangeVideoDevice(ev: React.ChangeEvent<HTMLSelectElement>) {
-    console.log("--- changing video device");
+    console.log('--- changing video device');
     setCamera(ev.target.value);
   }
 
   // change mic device
   function handleChangeMicDevice(ev: React.ChangeEvent<HTMLSelectElement>) {
-    console.log("--- changing mic device");
+    console.log('--- changing mic device');
     setMicrophone(ev.target.value);
   }
 
   // change speaker device
   function handleChangeSpeakerDevice(ev: React.ChangeEvent<HTMLSelectElement>) {
-    console.log("--- changing speaker device");
+    console.log('--- changing speaker device');
     setSpeaker(ev?.target?.value);
   }
 
@@ -238,16 +238,16 @@ export default function App() {
 
   const participantCounts = hiddenParticipantCount + presentParticipantCount;
 
-  const [dailyRoomUrl, setDailyRoomUrl] = useState("");
+  const [dailyRoomUrl, setDailyRoomUrl] = useState('');
 
   return (
     <>
-      <div className="App">
+      <div className='App'>
         <br />
         1. Join the call
         <br />
         <input
-          type="text"
+          type='text'
           value={dailyRoomUrl}
           onChange={(event) => {
             setDailyRoomUrl(event.target.value);
@@ -256,7 +256,7 @@ export default function App() {
         <p>
           {dailyRoomUrl
             ? dailyRoomUrl
-            : "Please enter a room url (e.g. https://example.daily.co/room)"}
+            : 'Please enter a room url (e.g. https://example.daily.co/room)'}
         </p>
         <button onClick={() => load()}>Load</button> <br />
         <button onClick={() => preAuth()}>Preauth</button> <br />
@@ -268,7 +268,7 @@ export default function App() {
         <br />
         2. Select your device <br />
         <select
-          id="video-devices"
+          id='video-devices'
           value={currentCamera?.device?.deviceId}
           onChange={handleChangeVideoDevice}
         >
@@ -280,7 +280,7 @@ export default function App() {
         </select>
         <br />
         <select
-          id="mic-devices"
+          id='mic-devices'
           value={currentMicrophone?.device?.deviceId}
           onChange={handleChangeMicDevice}
         >
@@ -295,7 +295,7 @@ export default function App() {
         </select>
         <br />
         <select
-          id="speaker-devices"
+          id='speaker-devices'
           value={currentSpeaker?.device?.deviceId}
           onChange={handleChangeSpeakerDevice}
         >
@@ -331,7 +331,7 @@ export default function App() {
         <br />
       </div>
       {participantIds.map((id) => (
-        <DailyVideo type="video" key={id} automirror sessionId={id} />
+        <DailyVideo type='video' key={id} automirror sessionId={id} />
       ))}
       {/* {screens.map((screen) => (
         <DailyVideo
@@ -342,10 +342,10 @@ export default function App() {
         />
       ))} */}
       <DailyAudio />
-      <div id="meetingState">Meeting State: {callObject?.meetingState()}</div>
+      <div id='meetingState'>Meeting State: {callObject?.meetingState()}</div>
       {inputSettingsUpdated && <div>Input settings updated</div>}
-      {errorMsg && <div id="errorMsg">{errorMsg}</div>}
-      <div id="participantCount">Participant Counts: {participantCounts}</div>
+      {errorMsg && <div id='errorMsg'>{errorMsg}</div>}
+      <div id='participantCount'>Participant Counts: {participantCounts}</div>
       <div>Network quality: {network.quality}</div>
     </>
   );
